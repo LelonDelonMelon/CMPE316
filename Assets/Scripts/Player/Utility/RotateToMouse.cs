@@ -18,9 +18,6 @@ public class RotateToMouse : MonoBehaviour
             // Calculate the rotation based on the direction
             Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-            // Set the rotation of the object
-           // transform.rotation = rotation;
-            
             transform.rotation = orientation.rotation;
         
     }

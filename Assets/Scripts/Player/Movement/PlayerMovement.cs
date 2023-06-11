@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isReadyToJump;
     [SerializeField] private bool isJumping;
 
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashCooldown;
+    [SerializeField] private bool isReadyToDash = true;
 
     [Header("Keybindings")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
@@ -108,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift)){
+            Dash();
+        }
+
+
         if (Input.GetKeyDown(crouchKey))
         {
             isCrouching = !isCrouching;
@@ -151,6 +159,8 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = orientation.forward *verticalInput + orientation.right *horizontalInput;
 
+
+     
 
         if(isGrounded)
         {
@@ -198,5 +208,23 @@ public class PlayerMovement : MonoBehaviour
         isJumping = false;
     }
 
+    public void setSpeed(float speed)
+    {
+        this.moveSpeed = speed;
+    }
+    public void Dash()
+    {
+        Vector3 dashDirection = orientation.forward;
 
+        // Apply the dash force to the rigidbody
+        rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
+
+        // Start the dash cooldown
+        isReadyToDash = false;
+        Invoke(nameof(ResetDash), dashCooldown);
+    }
+    private void ResetDash()
+    {
+        isReadyToDash = true;
+    }
 }

@@ -8,22 +8,19 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private int health = 100;
     [SerializeField] private int damage = 40;
     [SerializeField] private int currentHealth;
+    [SerializeField] private GameObject perkSprite;
+
+
+    
 
     [SerializeField] private GameObject enemySpawner;
     private EnemySpawner es;
 
-    // Start is called before the first frame update
     void Start()
     {
         currentHealth = health;
         enemySpawner = GameObject.Find("EnemySpawner");
         es = enemySpawner.GetComponent<EnemySpawner>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void takeDamage(int damage)
@@ -50,13 +47,21 @@ public class EnemyCombat : MonoBehaviour
     public void attack(GameObject target)
     {
          target.GetComponent<PlayerCombat>().takeDamage(this.damage);
+
     }
     public void Die()
     {
+        int randomChance = Random.Range(1, 10);
+        int randomChance2 = Random.Range(1, 10);
         // Destroy(gameObject);
         this.gameObject.SetActive(false);
         int numOfEnemies = es.getCurrentNumberOfEnemies();
         es.setCurrentNumberOfEnemies(numOfEnemies - 1);
+
+        if(randomChance % randomChance2 == 0)
+        {
+            dropPerk();
+        }
     }
     public void Reset()
     {
@@ -68,6 +73,11 @@ public class EnemyCombat : MonoBehaviour
     {
 
         gameObject.layer = LayerMask.NameToLayer("Pickable");
+
+    }
+    public void dropPerk()
+    {
+        Instantiate(perkSprite, transform.position, Quaternion.identity);
 
     }
 }

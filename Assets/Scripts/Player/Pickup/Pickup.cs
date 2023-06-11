@@ -62,6 +62,7 @@ public class Pickup : MonoBehaviour
                         heldObjectRb = hit.rigidbody;
                         hitPoint = hit.point;
                         hit.transform.GetComponent<Renderer>().material.color = Color.red;
+                        hit.transform.GetComponent<Follow>().setIsFollowing(false);
                         heldObject = hit.transform.gameObject;
 
 
@@ -78,21 +79,9 @@ public class Pickup : MonoBehaviour
                             heldObjectRb.isKinematic = true;
                         }
 
-                        if (playerCombat.isShooting())
-                        {
-                            if (muzzleFlash != null)
-                            {
-                                muzzleFlash.Play();
-                            }
-                            else
-                            {
-                                Debug.Log("NULL");
-                            }
-                        }
                     }
 
                 }
-
 
             }
 

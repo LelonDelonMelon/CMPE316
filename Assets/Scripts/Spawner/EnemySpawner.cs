@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
     [SerializeField] private int currentNumberOfEnemies = 0;
 
-    private void Start()
+    private void Awake()
     {
         enemyPool = new List<GameObject>();
         spawnTimer = spawnInterval;
@@ -28,13 +28,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        //spawnTimer -= Time.deltaTime;
 
         if (currentNumberOfEnemies < maxEnemies)
         {
             StartCoroutine(spawner());
-            //SpawnEnemy();
-          //  spawnTimer = spawnInterval;
         }
     }
     IEnumerator spawner()
@@ -90,7 +87,6 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-        // Modify these values according to your desired range
         float minX = -10f;
         float maxX = 10f;
         float minY = 0f;
@@ -102,7 +98,7 @@ public class EnemySpawner : MonoBehaviour
         float randomY = Random.Range(minY, maxY);
         float randomZ = Random.Range(minZ, maxZ);
 
-        //Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
+        Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
 
         //Vector3 randomPosition = new Vector3(509.096436f, 17.6499996f, 600.366882f);
 
