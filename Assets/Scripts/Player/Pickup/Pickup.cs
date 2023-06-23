@@ -63,6 +63,7 @@ public class Pickup : MonoBehaviour
                         hitPoint = hit.point;
                         hit.transform.GetComponent<Renderer>().material.color = Color.red;
                         hit.transform.GetComponent<Follow>().setIsFollowing(false);
+                        hit.transform.GetComponent<MeshCollider>().enabled = false;
                         heldObject = hit.transform.gameObject;
 
 
@@ -113,6 +114,7 @@ public class Pickup : MonoBehaviour
                 if (heldObjectRb != null)
                 {
                     heldObjectRb.isKinematic = false;
+                    heldObject.GetComponent<MeshCollider>().enabled = true;
                 }
 
                 // Clear the reference to the held object and remove its parent
