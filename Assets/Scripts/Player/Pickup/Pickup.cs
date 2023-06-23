@@ -62,8 +62,8 @@ public class Pickup : MonoBehaviour
                         heldObjectRb = hit.rigidbody;
                         hitPoint = hit.point;
                         hit.transform.GetComponent<Renderer>().material.color = Color.red;
-                        hit.transform.GetComponent<Follow>().setIsFollowing(false);
-                        hit.transform.GetComponent<MeshCollider>().enabled = false;
+                       // hit.transform.GetComponent<Follow>().setIsFollowing(false);
+               
                         heldObject = hit.transform.gameObject;
 
 
